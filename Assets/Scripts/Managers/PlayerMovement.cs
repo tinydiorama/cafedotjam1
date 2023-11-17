@@ -23,7 +23,15 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 moveInput;
+        if ( GameManager.GetInstance().isPaused )
+        {
+            moveInput = Vector2.zero;
+        } else
+        {
+
+            moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        }
 
         if ( ! animLocked && moveInput != Vector2.zero )
         {
