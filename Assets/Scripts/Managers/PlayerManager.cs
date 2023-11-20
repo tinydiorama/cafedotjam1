@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int playerHP = 100;
+    public int playerDamage = 10;
+
+    private static PlayerManager instance;
+
+    private void Awake()
     {
-        
+        if (instance != null)
+        {
+            Debug.Log("more than one player manager");
+        }
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public static PlayerManager GetInstance()
     {
-        
+        return instance;
     }
 }

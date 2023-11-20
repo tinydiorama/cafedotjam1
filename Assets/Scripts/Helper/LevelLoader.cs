@@ -37,7 +37,11 @@ public class LevelLoader : MonoBehaviour
     public void LoadLevel(int level)
     {
         fader.gameObject.SetActive(true);
-        LeanTween.alpha(fader, 1, 0.5f).setOnComplete(() =>
+        if ( mostRecentScene == (int)SceneIndexes.TITLE_SCREEN )
+        {
+            AudioManager.GetInstance().FadeOutMusic();
+        }
+        LeanTween.alpha(fader, 1, 1f).setOnComplete(() =>
         {
             loadingScreen.SetActive(true);
             fader.gameObject.SetActive(false);
@@ -52,7 +56,11 @@ public class LevelLoader : MonoBehaviour
     public void LoadLevel(int level, Vector2 playerCoords)
     {
         fader.gameObject.SetActive(true);
-        LeanTween.alpha(fader, 1, 0.5f).setOnComplete(() =>
+        if (mostRecentScene == (int)SceneIndexes.TITLE_SCREEN)
+        {
+            AudioManager.GetInstance().FadeOutMusic();
+        }
+        LeanTween.alpha(fader, 1, 1f).setOnComplete(() =>
         {
             loadingScreen.SetActive(true);
             fader.gameObject.SetActive(false);
@@ -79,6 +87,11 @@ public class LevelLoader : MonoBehaviour
         LeanTween.alpha(fader, 0, 0.5f).setOnComplete(() =>
         {
             fader.gameObject.SetActive(false);
+            if (mostRecentScene == (int)SceneIndexes.MAIN_WORLD)
+            {
+                Debug.Log("loaded scene!");
+                AudioManager.GetInstance().StartPlaylist();
+            }
         });
     }
     public IEnumerator GetSceneLoadProgress(Vector2 playerCoords)
@@ -101,9 +114,14 @@ public class LevelLoader : MonoBehaviour
         fader.gameObject.SetActive(true);
         loadingScreen.SetActive(false);
         OnNewLevelLoaded?.Invoke(mostRecentScene);
-        LeanTween.alpha(fader, 0, 0.7f).setOnComplete(() =>
+        LeanTween.alpha(fader, 0, 0.5f).setOnComplete(() =>
         {
             fader.gameObject.SetActive(false);
+            if (mostRecentScene == (int)SceneIndexes.MAIN_WORLD)
+            {
+                Debug.Log("loaded scene!");
+                AudioManager.GetInstance().StartPlaylist();
+            }
         });
     }
 }

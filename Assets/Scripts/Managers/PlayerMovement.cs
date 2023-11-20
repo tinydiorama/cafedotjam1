@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 moveInput;
         if ( GameManager.GetInstance().isPaused )
         {
             moveInput = Vector2.zero;
