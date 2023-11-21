@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bpm: 70
   track: {fileID: 8300000, guid: 61fe91b890bf17041b5e90a7c871cb9f, type: 3}
-  firstBeatOffset: 0.3
+  firstBeatOffset: 0.175
   noteCombos:
   - notes:
     - 1

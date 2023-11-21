@@ -13,6 +13,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private GameObject monsterVolley;
     [SerializeField] private GameObject playerVolley;
 
+    [SerializeField] private AudioSource soundPlayer;
     [SerializeField] private AudioClip sound;
 
     public float timeBetweenBeats;
@@ -80,6 +81,8 @@ public class BattleManager : MonoBehaviour
         currentBeats = currentSeconds / timeBetweenBeats;
         if ( (int)currentBeats != currentBeatInt )
         {
+            soundPlayer.clip = sound;
+            soundPlayer.Play();
             bpmDisplay.text = Mathf.Round(currentBeats).ToString();
             currentBeatInt = (int)currentBeats;
 
