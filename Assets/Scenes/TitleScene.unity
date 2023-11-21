@@ -818,8 +818,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.276886, y: -16.7261}
-  m_SizeDelta: {x: -34.0061, y: -69.9457}
+  m_AnchoredPosition: {x: 17.007, y: -33.137962}
+  m_SizeDelta: {x: -101.35, y: -102.7694}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &702476537
 MonoBehaviour:
@@ -841,8 +841,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Art: Terderrer\nCoding: Becky @ Tinydiorama\nMusic: Capslock Overshift
-    \nhttps://soundcloud.com/capslockovershift\nSound Design: alex alios\nhttps://soundcloud.com/alex-alios"
+  m_text: 'Art: Terderrer
+
+    Coding: Becky @ Tinydiorama
+
+    Music: CapslockOverShift
+
+    https://linktr.ee/capslockovershift
+
+    Sound
+    Design: alex alios
+
+    https://soundcloud.com/alex-alios'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 798345d9b0baa61458186b04e3c12f33, type: 2}
   m_sharedMaterial: {fileID: 8956001687763024424, guid: 798345d9b0baa61458186b04e3c12f33, type: 2}
@@ -851,8 +861,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1304,8 +1314,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.27694702, y: -26.945297}
-  m_SizeDelta: {x: -34.006, y: 23.4794}
+  m_AnchoredPosition: {x: 6.245392, y: -62.694763}
+  m_SizeDelta: {x: -122.8696, y: 20.7043}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1430525983
 MonoBehaviour:
@@ -1336,8 +1346,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1577,8 +1587,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -249.3719, y: -149.0148}
+  m_AnchoredPosition: {x: 7.9578857, y: -3.315796}
+  m_SizeDelta: {x: -198.9715, y: -102.5935}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2019828508
 MonoBehaviour:
@@ -1600,7 +1610,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -2038936866, guid: 7fe4680b1e8b79e40b8e4f9b2f8bb7db, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1724,11 +1734,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5981550009182841555, guid: c4678af434766f5479eb04a2083937bd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 249
+      value: 331
       objectReference: {fileID: 0}
     - target: {fileID: 5981550009182841555, guid: c4678af434766f5479eb04a2083937bd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 123.76
+      value: 157.1
       objectReference: {fileID: 0}
     - target: {fileID: 5981550009182841555, guid: c4678af434766f5479eb04a2083937bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
