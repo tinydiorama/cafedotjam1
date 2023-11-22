@@ -71,7 +71,7 @@ public class BattleManager : MonoBehaviour
         monsterAnimator.speed = currentTrack.bpm / 60f;
 
         PlayerManager pm = PlayerManager.GetInstance();
-        playerHP = pm.playerHP;
+        playerHP = pm.Health;
         playerDamage = pm.playerDamage;
     }
 

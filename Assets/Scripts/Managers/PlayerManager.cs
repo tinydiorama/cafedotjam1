@@ -4,7 +4,23 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public int playerHP = 100;
+    public int Health
+    {
+        set
+        {
+            health = value;
+            if (health <= 0)
+            {
+                Defeated();
+            }
+        }
+        get
+        {
+            return health;
+        }
+    }
+
+    [SerializeField] public int health = 100;
     public int playerDamage = 10;
 
     private static PlayerManager instance;
@@ -21,5 +37,10 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager GetInstance()
     {
         return instance;
+    }
+
+    private void Defeated()
+    {
+        Destroy(gameObject);
     }
 }

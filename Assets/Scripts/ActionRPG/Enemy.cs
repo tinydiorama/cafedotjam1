@@ -1,10 +1,11 @@
+using Ink.Parsed;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float Health
+    public int Health
     {
         set
         {
@@ -20,10 +21,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    [SerializeField] private float health = 1;
+    [SerializeField] private int health = 1;
+    [SerializeField] private int damage = 5;
 
     public void Defeated()
     {
         Destroy(gameObject);
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+
+            PlayerManager player = other.gameObject.GetComponent<PlayerManager>();
+
+            if (player != null)
+            {
+                player.Health -= damage;
+            }
+        }
     }
 }

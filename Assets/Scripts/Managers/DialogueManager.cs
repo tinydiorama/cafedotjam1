@@ -85,6 +85,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
+        GameManager.GetInstance().isPaused = true;
         currentStory = new Story(inkJSON.text);
 
         currentPanel = dialoguePanel;
@@ -93,7 +94,7 @@ public class DialogueManager : MonoBehaviour
         isDialogue = true;
         // reset portrait, layout, and speaker
         displayNameText.text = "???";
-        portraitAnimator.Play("default");
+        portraitAnimator.Play("PortraitNoTalking");
 
         dialogueIsPlaying = true;
         currentPanel.SetActive(true);

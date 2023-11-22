@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float damage = 3;
+    public int damage = 3;
     public enum AttackDirection
     {
         left, right, up, down
@@ -22,26 +22,33 @@ public class PlayerAttack : MonoBehaviour
 
     private void attackRight()
     {
-        hitCollider.enabled = true;
         transform.localPosition = rightAttackOffset;
+        StartCoroutine(enableCollider());
     }
 
     private void attackLeft()
     {
-        hitCollider.enabled = true;
         transform.localPosition = new Vector3(rightAttackOffset.x * -1, rightAttackOffset.y);
+        StartCoroutine(enableCollider());
     }
 
     private void attackUp()
     {
-        hitCollider.enabled = true;
         transform.localPosition = new Vector3(0, 1);
+        StartCoroutine(enableCollider());
     }
 
     private void attackDown()
     {
-        hitCollider.enabled = true;
         transform.localPosition = new Vector3(0, -1);
+        StartCoroutine(enableCollider());
+    }
+
+    IEnumerator enableCollider()
+    {
+        yield return new WaitForSeconds(0.15f);
+        hitCollider.enabled = true;
+
     }
 
     public void attack()

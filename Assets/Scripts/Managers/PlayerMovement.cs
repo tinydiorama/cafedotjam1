@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float runSpeed = 5.0f;
     [SerializeField] private PlayerAttack playerAttack;
+    [SerializeField] private TrailRenderer tr;
 
     private Vector2 moveInput = Vector2.zero;
     private bool canMove = true;
@@ -17,11 +18,19 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _smoothedMovementInput;
     private Vector2 _movementInputSmoothVelocity;
 
+    // dashing
+    private float activeMoveSpeed;
+    private float dashSpeed = 24f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+    public float dashCounter;
 
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        activeMoveSpeed = runSpeed;
+        dashCounter = 0;
     }
 
     void FixedUpdate()
@@ -29,11 +38,7 @@ public class PlayerMovement : MonoBehaviour
         if ( GameManager.GetInstance().isPaused )
         {
             moveInput = Vector2.zero;
-        } else
-        {
-
-            //moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        }
+        } 
 
         if ( ! animLocked && moveInput != Vector2.zero )
         {
@@ -57,14 +62,30 @@ public class PlayerMovement : MonoBehaviour
             playerAttack.attackDirection = PlayerAttack.AttackDirection.up;
         }
 
+
         _smoothedMovementInput = Vector2.SmoothDamp(
             _smoothedMovementInput,
             moveInput,
             ref _movementInputSmoothVelocity,
             0.1f);
-        body.velocity = moveInput * runSpeed;
+        if ( canMove )
+        {
+            body.velocity = moveInput * activeMoveSpeed;
+        } else
+        {
+            body.velocity = moveInput * 0;
+        }
 
         updateAnimation();
+
+        if ( dashCounter > 0 )
+        {
+            dashCounter -= Time.deltaTime;
+            if ( dashCounter < 0 )
+            {
+                dashCounter = 0;
+            }
+        }
     }
 
     private void updateAnimation()
@@ -92,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
         animator.Play("PlayerAttack");
         playerAttack.attack();
         animLocked = true;
+        canMove = false;
     }
 
     public void endAttack()
@@ -99,5 +121,25 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("gets here");
         playerAttack.stopAttack();
         animLocked = false;
+        canMove = true;
+    }
+
+    public void OnInteract()
+    {
+        if ( dashCounter == 0 )
+        {
+            Debug.Log("dashing");
+            StartCoroutine(dash());
+        }
+    }
+
+    private IEnumerator dash()
+    {
+        dashCounter = dashingCooldown;
+        activeMoveSpeed = dashSpeed;
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        activeMoveSpeed = runSpeed;
+        tr.emitting = false;
     }
 }
