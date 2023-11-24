@@ -15,6 +15,10 @@ public class Song : ScriptableObject
     public float bpm;
     public AudioClip track;
     public float firstBeatOffset;
+    public int damageOffset;
+    public int defenseOffset;
+    public string stat1;
+    public string stat2;
 
     [SerializeField]
     public List<Notes> noteCombos;

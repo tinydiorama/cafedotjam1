@@ -89,7 +89,7 @@ public class EnemyAI : MonoBehaviour
             }
         } else
         {
-            // player not in range, don't pursue
+            //player not in range, don't pursue
             updateTargetDirection();
             rb.velocity = targetDirection * speed;
         }

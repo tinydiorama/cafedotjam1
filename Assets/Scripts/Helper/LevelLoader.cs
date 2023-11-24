@@ -89,7 +89,6 @@ public class LevelLoader : MonoBehaviour
             fader.gameObject.SetActive(false);
             if (mostRecentScene == (int)SceneIndexes.MAIN_WORLD)
             {
-                Debug.Log("loaded scene!");
                 AudioManager.GetInstance().StartPlaylist();
             }
         });
@@ -119,7 +118,6 @@ public class LevelLoader : MonoBehaviour
             fader.gameObject.SetActive(false);
             if (mostRecentScene == (int)SceneIndexes.MAIN_WORLD)
             {
-                Debug.Log("loaded scene!");
                 AudioManager.GetInstance().StartPlaylist();
             }
         });

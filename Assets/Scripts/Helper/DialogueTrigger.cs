@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject visualCue;
-    [SerializeField] private TextAsset dialogue;
+    [SerializeField] public GameObject visualCue;
+    [SerializeField] public TextAsset dialogue;
 
     private bool playerInRange;
 
@@ -20,10 +20,6 @@ public class DialogueTrigger : MonoBehaviour
         if ( playerInRange)
         {
             visualCue.SetActive(true);
-            if (Input.GetKeyDown("space"))
-            {
-                DialogueManager.GetInstance().EnterDialogueMode(dialogue);
-            }
         } else
         {
             visualCue.SetActive(false);

@@ -25,12 +25,29 @@ public class PlayerMovement : MonoBehaviour
     private float dashingCooldown = 1f;
     public float dashCounter;
 
+    // dialogue
+    private bool dialogueInRange;
+    private DialogueTrigger dialogueTrigger;
+
+    // change playlist
+
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         activeMoveSpeed = runSpeed;
         dashCounter = 0;
+    }
+
+    private void Update()
+    {
+        if (dialogueInRange == true)
+        {
+            HUD.GetInstance().hideHelpText();
+        } else
+        {
+            HUD.GetInstance().showHelpText();
+        }
     }
 
     void FixedUpdate()
@@ -108,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         moveInput = movementValue.Get<Vector2>();
     }
 
-    private void OnFire()
+    public void OnFire()
     {
         animator.Play("PlayerAttack");
         playerAttack.attack();
@@ -118,17 +135,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void endAttack()
     {
-        Debug.Log("gets here");
         playerAttack.stopAttack();
         animLocked = false;
         canMove = true;
+        playerAttack.isAttacking = false;
     }
 
-    public void OnInteract()
+    public void OnDash()
     {
         if ( dashCounter == 0 )
         {
-            Debug.Log("dashing");
             StartCoroutine(dash());
         }
     }
@@ -141,5 +157,41 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashingTime);
         activeMoveSpeed = runSpeed;
         tr.emitting = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "DialogueTrigger")
+        {
+            dialogueInRange = true;
+            dialogueTrigger = collision.gameObject.GetComponent<DialogueTrigger>();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "DialogueTrigger")
+        {
+            dialogueInRange = false;
+            dialogueTrigger = null;
+        }
+    }
+
+    public void OnInteract()
+    {
+        if (dialogueInRange && dialogueTrigger != null && !DialogueManager.GetInstance().dialogueIsPlaying )
+        {
+            StartCoroutine(showDialogue());
+        } else if ( ! dialogueInRange )// change playlist
+        {
+            AudioManager.GetInstance().ChangeSong();
+            HUD.GetInstance().updateCurrentStats();
+        }
+    }
+
+    private IEnumerator showDialogue()
+    {
+        yield return new WaitForSeconds(0.2f);
+        DialogueManager.GetInstance().EnterDialogueMode(dialogueTrigger.dialogue);
     }
 }

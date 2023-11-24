@@ -97,4 +97,24 @@ public class AudioManager : MonoBehaviour
         _sfxsource.loop = false;
         _sfxsource.PlayOneShot(clip, volume);
     }
+
+    public int getCurrentPlayerAttackChange()
+    {
+        return songs[songPlaying].damageOffset;
+    }
+
+    public int getCurrentPlayerDefenseChange()
+    {
+        return songs[songPlaying].defenseOffset;
+    }
+
+    public string getCurrentPlayerAttackString()
+    {
+        return songs[songPlaying].stat1;
+    }
+
+    public string getCurrentPlayerDefenseString()
+    {
+        return songs[songPlaying].stat2;
+    }
 }

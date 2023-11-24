@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    [SerializeField] private int health = 1;
+    [SerializeField] private int health = 20;
     [SerializeField] private int damage = 5;
 
     public void Defeated()
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 
             if (player != null)
             {
-                player.Health -= damage;
+                player.Health -= (damage + AudioManager.GetInstance().getCurrentPlayerDefenseChange());
             }
         }
     }

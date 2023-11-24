@@ -558,6 +558,7 @@ MonoBehaviour:
   titleSong: {fileID: 8300000, guid: 831f76101f46ef04588eb2e78d514265, type: 3}
   songs:
   - {fileID: 11400000, guid: 362b49f7e8cedc64bbad5b6ef6b35d5a, type: 2}
+  - {fileID: 11400000, guid: c1c2ba38a476c4640965f4ddec0a4de3, type: 2}
   songPlaying: 0
   transitionTime: 0.5
 --- !u!82 &1119260083

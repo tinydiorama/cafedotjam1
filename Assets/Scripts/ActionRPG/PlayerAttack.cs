@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public int damage = 3;
+    public bool isAttacking;
+
     public enum AttackDirection
     {
         left, right, up, down
@@ -18,6 +20,7 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         rightAttackOffset = transform.position;
+        isAttacking = false;
     }
 
     private void attackRight()
@@ -53,6 +56,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void attack()
     {
+        isAttacking = true;
         switch(attackDirection)
         {
             case AttackDirection.left:
@@ -74,13 +78,15 @@ public class PlayerAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // deal damage
-        if ( other.tag == "Enemy" )
+        if ( other.tag == "Enemy" && isAttacking )
         {
             Enemy enemy = other.GetComponent<Enemy>();
 
             if ( enemy != null )
             {
-                enemy.Health -= damage;
+                Debug.Log("attacking enemy for damage " + damage + " plus " + AudioManager.GetInstance().getCurrentPlayerAttackChange());
+                enemy.Health -= damage + AudioManager.GetInstance().getCurrentPlayerAttackChange();
+                isAttacking = false;
             }
         }
     }

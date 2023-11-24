@@ -10,23 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 188b1eb05ec981641a928bd6e9605110, type: 3}
-  m_Name: Test
+  m_Name: Catastrophic
   m_EditorClassIdentifier: 
-  bpm: 70
-  track: {fileID: 8300000, guid: 61fe91b890bf17041b5e90a7c871cb9f, type: 3}
-  firstBeatOffset: 0.175
-  damageOffset: -2
-  defenseOffset: 3
-  stat1: Attack down!
-  stat2: Defense up!
-  noteCombos:
-  - notes:
-    - 1
-    - 2
-    - 5
-  - notes:
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
+  bpm: 100
+  track: {fileID: 8300000, guid: 8644fdc4aba8c514294fb310b5b5921d, type: 3}
+  firstBeatOffset: 0
+  damageOffset: 5
+  defenseOffset: -5
+  stat1: Attack up!
+  stat2: Defense down!
+  noteCombos: []
