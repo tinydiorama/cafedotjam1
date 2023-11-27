@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class HUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI stat1Text;
     [SerializeField] private TextMeshProUGUI stat2Text;
     [SerializeField] private GameObject helpText;
+
+
+    [SerializeField] private Sprite fullHeart;
+    [SerializeField] private Sprite halfHeart;
+    [SerializeField] private Sprite emptyHeart;
+
+    [SerializeField] private GameObject[] heartDisplays;
 
     private PlayerManager pm;
     public float hpWidth;
@@ -40,11 +48,29 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hpWidth = defaultHP.rect.width;
-        float hpPercent = pm.Health / 100f;
-        float newWidth = hpPercent * hpWidth;
-        // should be in an event listener
-        HPpanel.sizeDelta = new Vector2(newWidth, HPpanel.rect.height);
+        updateHearts();
+    }
+
+    public void updateHearts()
+    {
+        float maxHealth = pm.maxHealth;
+        float currentHealth = pm.Health;
+        float numHearts = currentHealth / 10;
+        foreach( GameObject heartDisplay in heartDisplays)
+        {
+            Image heartImage = heartDisplay.GetComponent<Image>();
+            if ( numHearts == 0.5 ) // display half a heart
+            {
+                heartImage.sprite = halfHeart;
+            } else if ( numHearts >= 1 ) // display a heart
+            {
+                heartImage.sprite = fullHeart;
+            } else // display an empty heart
+            {
+                heartImage.sprite = emptyHeart;
+            }
+            numHearts--;
+        }
     }
 
     public void updateCurrentStats()

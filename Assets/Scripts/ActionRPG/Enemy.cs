@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    [SerializeField] private int health = 20;
+    [SerializeField] private int health = 10;
     [SerializeField] private int damage = 5;
 
     public void Defeated()

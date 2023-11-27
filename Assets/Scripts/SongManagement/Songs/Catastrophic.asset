@@ -16,7 +16,7 @@ MonoBehaviour:
   track: {fileID: 8300000, guid: 8644fdc4aba8c514294fb310b5b5921d, type: 3}
   firstBeatOffset: 0
   damageOffset: 5
-  defenseOffset: -5
+  defenseOffset: 5
   stat1: Attack up!
   stat2: Defense down!
   noteCombos: []

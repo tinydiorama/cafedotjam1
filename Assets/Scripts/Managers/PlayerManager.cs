@@ -20,7 +20,8 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    [SerializeField] public int health = 100;
+    [SerializeField] public int health = 50;
+    [SerializeField] public int maxHealth = 50;
     public int playerDamage = 10;
 
     private static PlayerManager instance;

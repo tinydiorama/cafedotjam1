@@ -15,8 +15,8 @@ MonoBehaviour:
   bpm: 70
   track: {fileID: 8300000, guid: 61fe91b890bf17041b5e90a7c871cb9f, type: 3}
   firstBeatOffset: 0.175
-  damageOffset: -2
-  defenseOffset: 3
+  damageOffset: 0
+  defenseOffset: -5
   stat1: Attack down!
   stat2: Defense up!
   noteCombos:

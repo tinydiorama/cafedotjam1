@@ -151,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator dash()
     {
+        animator.Play("PlayerDash");
         dashCounter = dashingCooldown;
         activeMoveSpeed = dashSpeed;
         tr.emitting = true;
