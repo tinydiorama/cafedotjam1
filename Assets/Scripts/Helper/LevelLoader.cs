@@ -87,10 +87,6 @@ public class LevelLoader : MonoBehaviour
         LeanTween.alpha(fader, 0, 0.5f).setOnComplete(() =>
         {
             fader.gameObject.SetActive(false);
-            if (mostRecentScene == (int)SceneIndexes.MAIN_WORLD)
-            {
-                AudioManager.GetInstance().StartPlaylist();
-            }
         });
     }
     public IEnumerator GetSceneLoadProgress(Vector2 playerCoords)
@@ -116,10 +112,6 @@ public class LevelLoader : MonoBehaviour
         LeanTween.alpha(fader, 0, 0.5f).setOnComplete(() =>
         {
             fader.gameObject.SetActive(false);
-            if (mostRecentScene == (int)SceneIndexes.MAIN_WORLD)
-            {
-                AudioManager.GetInstance().StartPlaylist();
-            }
         });
     }
 }

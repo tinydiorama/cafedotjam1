@@ -54,44 +54,49 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if ( playerInRange )
+        if ( ! GameManager.GetInstance().isPaused )
         {
-            if (currentWaypoint >= path.vectorPath.Count)
+
+            if (playerInRange)
             {
-                reachedEndOfPath = true;
-                return;
+                if (currentWaypoint >= path.vectorPath.Count)
+                {
+                    reachedEndOfPath = true;
+                    return;
+                }
+                else
+                {
+                    reachedEndOfPath = false;
+                }
+
+                targetDirection = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+                Vector2 force = targetDirection * speed * Time.deltaTime;
+
+                //rb.AddForce(force);
+                rb.velocity = targetDirection * speed;
+
+                float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+
+                if (distance < nextWaypointDistance)
+                {
+                    currentWaypoint++;
+                }
+
+                if (force.x >= 0.01f)
+                {
+                    transform.localScale = new Vector3(-1f, 1f, 1f);
+                }
+                else if (force.x <= -0.01f)
+                {
+                    transform.localScale = new Vector3(1f, 1f, 1f);
+                }
             }
             else
             {
-                reachedEndOfPath = false;
+                //player not in range, don't pursue
+                updateTargetDirection();
+                rb.velocity = targetDirection * speed;
             }
-
-            targetDirection = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-            Vector2 force = targetDirection * speed * Time.deltaTime;
-
-            //rb.AddForce(force);
-            rb.velocity = targetDirection * speed;
-
-            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-
-            if (distance < nextWaypointDistance)
-            {
-                currentWaypoint++;
-            }
-
-            if (force.x >= 0.01f)
-            {
-                transform.localScale = new Vector3(-1f, 1f, 1f);
-            }
-            else if (force.x <= -0.01f)
-            {
-                transform.localScale = new Vector3(1f, 1f, 1f);
-            }
-        } else
-        {
-            //player not in range, don't pursue
-            updateTargetDirection();
-            rb.velocity = targetDirection * speed;
         }
 
 

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject hud;
     public bool isPaused;
+    public bool isGameStarted;
+    public bool isBeginningDialogue;
 
     private static GameManager instance;
     private void Awake()
@@ -18,5 +21,12 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance()
     {
         return instance;
+    }
+
+    public void startGame()
+    {
+        isGameStarted = true;
+        hud.SetActive(true);
+        AudioManager.GetInstance().StartPlaylist();
     }
 }

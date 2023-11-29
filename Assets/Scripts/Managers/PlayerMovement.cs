@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 5.0f;
     [SerializeField] private PlayerAttack playerAttack;
     [SerializeField] private TrailRenderer tr;
+    [SerializeField] private AudioClip attackSound;
 
     private Vector2 moveInput = Vector2.zero;
     private bool canMove = true;
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Vector2 _smoothedMovementInput;
     private Vector2 _movementInputSmoothVelocity;
+    private GameManager gm;
 
     // dashing
     private float activeMoveSpeed;
@@ -30,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     private DialogueTrigger dialogueTrigger;
 
     // change playlist
+    // Door
+    private bool doorInRange;
+    private DoorManager doorTrigger;
 
     private void Start()
     {
@@ -37,22 +42,27 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         activeMoveSpeed = runSpeed;
         dashCounter = 0;
+        gm = GameManager.GetInstance();
     }
 
     private void Update()
     {
-        if (dialogueInRange == true)
+        if ( HUD.GetInstance() != null )
         {
-            HUD.GetInstance().hideHelpText();
-        } else
-        {
-            HUD.GetInstance().showHelpText();
+            if (dialogueInRange == true || doorInRange == true)
+            {
+                HUD.GetInstance().hideHelpText();
+            }
+            else
+            {
+                HUD.GetInstance().showHelpText();
+            }
         }
     }
 
     void FixedUpdate()
     {
-        if ( GameManager.GetInstance().isPaused )
+        if ( gm.isPaused )
         {
             moveInput = Vector2.zero;
         } 
@@ -127,10 +137,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnFire()
     {
-        animator.Play("PlayerAttack");
-        playerAttack.attack();
-        animLocked = true;
-        canMove = false;
+        if ( gm.isGameStarted && ! gm.isPaused )
+        {
+            animator.Play("PlayerAttack");
+            playerAttack.attack();
+            AudioManager.GetInstance().playSFX(attackSound);
+            animLocked = true;
+            canMove = false;
+        }
     }
 
     public void endAttack()
@@ -143,9 +157,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDash()
     {
-        if ( dashCounter == 0 )
+        if (gm.isGameStarted && !gm.isPaused)
         {
-            StartCoroutine(dash());
+            if (dashCounter == 0)
+            {
+                StartCoroutine(dash());
+            }
         }
     }
 
@@ -167,6 +184,11 @@ public class PlayerMovement : MonoBehaviour
             dialogueInRange = true;
             dialogueTrigger = collision.gameObject.GetComponent<DialogueTrigger>();
         }
+        if (collision.gameObject.tag == "Door")
+        {
+            doorInRange = true;
+            doorTrigger = collision.gameObject.GetComponent<DoorManager>();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -176,17 +198,30 @@ public class PlayerMovement : MonoBehaviour
             dialogueInRange = false;
             dialogueTrigger = null;
         }
+        if (collision.gameObject.tag == "Door")
+        {
+            doorInRange = false;
+            doorTrigger = null;
+        }
     }
 
     public void OnInteract()
     {
-        if (dialogueInRange && dialogueTrigger != null && !DialogueManager.GetInstance().dialogueIsPlaying )
+        if ( ! gm.isPaused )
         {
-            StartCoroutine(showDialogue());
-        } else if ( ! dialogueInRange )// change playlist
-        {
-            AudioManager.GetInstance().ChangeSong();
-            HUD.GetInstance().updateCurrentStats();
+            if (dialogueInRange && dialogueTrigger != null && !DialogueManager.GetInstance().dialogueIsPlaying)
+            {
+                StartCoroutine(showDialogue());
+            }
+            else if (!dialogueInRange && doorInRange)
+            {
+                doorTrigger.goToCoordinates();
+            }
+            else if (gm.isGameStarted && !dialogueInRange)// change playlist
+            {
+                AudioManager.GetInstance().ChangeSong();
+                HUD.GetInstance().updateCurrentStats();
+            }
         }
     }
 

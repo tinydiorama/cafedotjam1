@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 
     public void startGame()
     {
-        loader.LoadLevel((int)SceneIndexes.MAIN_WORLD, new Vector2(0f, 0f));
+        loader.LoadLevel((int)SceneIndexes.LETTER_SCREEN, new Vector2(0f, 0f));
         AudioManager.GetInstance().playSFX(goSound);
     }
     public void showCredits()
