@@ -20,14 +20,16 @@ public class EnemyShooting : MonoBehaviour
     {
 
         float distance = Vector2.Distance(transform.position, player.transform.position);
-
-        if ( distance < 4 )
+        if ( ! GameManager.GetInstance().isPaused )
         {
-            timer += Time.deltaTime;
-            if (timer > 2f)
+            if (distance < 4)
             {
-                timer = 0;
-                shoot();
+                timer += Time.deltaTime;
+                if (timer > 2f)
+                {
+                    timer = 0;
+                    shoot();
+                }
             }
         }
 

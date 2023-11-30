@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float transitionTime = 1f;
 
     private static AudioManager instance;
+    private bool playlistStarted;
 
     private void Awake()
     {
@@ -27,6 +28,15 @@ public class AudioManager : MonoBehaviour
     public static AudioManager GetInstance()
     {
         return instance;
+    }
+
+    private void Update()
+    {
+        if ( !_audiosource.isPlaying && playlistStarted)
+        {
+            ChangeSong();
+            HUD.GetInstance().updateCurrentStats();
+        }
     }
 
     public void FadeOutMusic()
@@ -62,6 +72,7 @@ public class AudioManager : MonoBehaviour
         _audiosource.loop = false;
         _audiosource.clip = songs[songPlaying].track;
         _audiosource.Play();
+        playlistStarted = true;
     }
     public void ChangeSong()
     {

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188b1eb05ec981641a928bd6e9605110, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  bpm: 70
-  track: {fileID: 8300000, guid: 61fe91b890bf17041b5e90a7c871cb9f, type: 3}
-  firstBeatOffset: 0.175
+  bpm: 152
+  track: {fileID: 8300000, guid: 822df07859667bf469d4d5bd8c53eb89, type: 3}
+  firstBeatOffset: 0
   damageOffset: 0
   defenseOffset: -5
   stat1: Attack down!

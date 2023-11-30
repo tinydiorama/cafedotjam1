@@ -15,12 +15,13 @@ public class EnemyAI : MonoBehaviour
     private Seeker seeker;
     private Rigidbody2D rb;
     private Vector2 targetDirection;
+    public bool enemyPaused;
 
     // wander randomly
     private float wanderTimer;
     private float wanderCooldown = 2f;
 
-    private bool playerInRange;
+    private GameObject player;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         InvokeRepeating("UpdatePath", 0f, 0.3f);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void UpdatePath()
@@ -54,10 +56,12 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if ( ! GameManager.GetInstance().isPaused )
+        if ( ! GameManager.GetInstance().isPaused && ! enemyPaused )
         {
 
-            if (playerInRange)
+            float playerDistance = Vector2.Distance(transform.position, player.transform.position);
+
+            if (playerDistance < 2.5)
             {
                 if (currentWaypoint >= path.vectorPath.Count)
                 {
@@ -113,22 +117,6 @@ public class EnemyAI : MonoBehaviour
             targetDirection = rotation * targetDirection;
 
             wanderTimer = Random.Range(1f, wanderCooldown);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            playerInRange = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            playerInRange = false;
         }
     }
 }

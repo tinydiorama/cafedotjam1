@@ -22,14 +22,13 @@ public class PlayerMovement : MonoBehaviour
 
     // dashing
     private float activeMoveSpeed;
-    private float dashSpeed = 24f;
+    private float dashSpeed = 15f;
     private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
+    private float dashingCooldown = 0.5f;
     public float dashCounter;
 
     // dialogue
-    private bool dialogueInRange;
-    private DialogueTrigger dialogueTrigger;
+    public bool dialogueInRange;
 
     // change playlist
     // Door
@@ -179,11 +178,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "DialogueTrigger")
-        {
-            dialogueInRange = true;
-            dialogueTrigger = collision.gameObject.GetComponent<DialogueTrigger>();
-        }
         if (collision.gameObject.tag == "Door")
         {
             doorInRange = true;
@@ -193,11 +187,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "DialogueTrigger")
-        {
-            dialogueInRange = false;
-            dialogueTrigger = null;
-        }
         if (collision.gameObject.tag == "Door")
         {
             doorInRange = false;
@@ -209,11 +198,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if ( ! gm.isPaused )
         {
-            if (dialogueInRange && dialogueTrigger != null && !DialogueManager.GetInstance().dialogueIsPlaying)
-            {
-                StartCoroutine(showDialogue());
-            }
-            else if (!dialogueInRange && doorInRange)
+            if (!dialogueInRange && doorInRange)
             {
                 doorTrigger.goToCoordinates();
             }
@@ -223,11 +208,5 @@ public class PlayerMovement : MonoBehaviour
                 HUD.GetInstance().updateCurrentStats();
             }
         }
-    }
-
-    private IEnumerator showDialogue()
-    {
-        yield return new WaitForSeconds(0.2f);
-        DialogueManager.GetInstance().EnterDialogueMode(dialogueTrigger.dialogue);
     }
 }

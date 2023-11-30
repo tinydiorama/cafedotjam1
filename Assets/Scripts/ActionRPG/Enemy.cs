@@ -7,6 +7,11 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Vector2 defaultCoords;
+    [SerializeField] private GameObject heartDrop;
+    [Range(0, 9)]
+    [SerializeField] private int chanceOfHeartDrop;
+    [Range(0, 9)]
+    [SerializeField] private int chanceOfNoteDrop;
 
     public int Health
     {
@@ -40,6 +45,15 @@ public class Enemy : MonoBehaviour
 
     public void Defeated()
     {
+        // spawn random drops
+        int randomDrop = Random.Range(0, 9);
+        Debug.Log(randomDrop);
+        if ( randomDrop <= chanceOfHeartDrop)
+        {
+            Debug.Log("instantiating heart");
+            GameObject obj = Instantiate(heartDrop, transform.parent);
+            obj.transform.localPosition = transform.localPosition;
+        }
         Destroy(gameObject);
     }
 
@@ -50,19 +64,4 @@ public class Enemy : MonoBehaviour
         sprite.color = Color.white;
     }
 
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-
-            PlayerManager player = other.gameObject.GetComponent<PlayerManager>();
-
-            if (player != null)
-            {
-                Debug.Log("player hit for " + damage + " plus " + AudioManager.GetInstance().getCurrentPlayerDefenseChange() + " modifier = " + (damage + AudioManager.GetInstance().getCurrentPlayerDefenseChange()));
-                player.Health -= (damage + AudioManager.GetInstance().getCurrentPlayerDefenseChange());
-            }
-        }
-    }
 }

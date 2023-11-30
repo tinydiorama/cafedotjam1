@@ -2307,8 +2307,8 @@ TextureImporter:
       name: cafedottileset_102
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -2328,7 +2328,7 @@ TextureImporter:
       name: cafedottileset_103
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -2341,6 +2341,27 @@ TextureImporter:
       bones: []
       spriteID: d55663a3512603347aaaa519b2b6b55b
       internalID: 1710548596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cafedottileset_104
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f90386ddb083c074583c89f0f6cbb3f1
+      internalID: -2014210826
       vertices: []
       indices: 
       edges: []
@@ -2363,6 +2384,7 @@ TextureImporter:
       cafedottileset_101: 873712004
       cafedottileset_102: -529767085
       cafedottileset_103: 1710548596
+      cafedottileset_104: -2014210826
       cafedottileset_11: -19864643
       cafedottileset_12: -81395908
       cafedottileset_13: -1796086329

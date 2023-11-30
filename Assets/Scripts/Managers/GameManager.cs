@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("more than one dialogue manager");
         }
         instance = this;
+        if ( isGameStarted )
+        {
+            startGame();
+        }
     }
     public static GameManager GetInstance()
     {

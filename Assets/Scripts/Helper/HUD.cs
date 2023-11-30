@@ -17,6 +17,8 @@ public class HUD : MonoBehaviour
     [SerializeField] private Sprite halfHeart;
     [SerializeField] private Sprite emptyHeart;
 
+    [SerializeField] private TextMeshProUGUI noteCount;
+
     [SerializeField] private GameObject[] heartDisplays;
 
     private PlayerManager pm;
@@ -71,6 +73,11 @@ public class HUD : MonoBehaviour
             }
             numHearts--;
         }
+    }
+
+    public void updateNotes()
+    {
+        noteCount.text = pm.numNotes.ToString();
     }
 
     public void updateCurrentStats()

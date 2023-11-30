@@ -77,10 +77,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("player attack");
         // deal damage
-        if ( other.tag == "Enemy" && isAttacking )
+        if ( other.gameObject.tag == "Enemy" && isAttacking )
         {
-            Enemy enemy = other.GetComponent<Enemy>();
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
 
             if ( enemy != null )
             {

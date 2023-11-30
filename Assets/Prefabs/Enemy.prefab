@@ -120,7 +120,6 @@ GameObject:
   - component: {fileID: 5778562162879790153}
   - component: {fileID: 5075870490141302937}
   - component: {fileID: 1513728651956629391}
-  - component: {fileID: 2511554814679483915}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -142,7 +141,7 @@ Transform:
   m_Children:
   - {fileID: 210554249671965630}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1919117239962268351
 MonoBehaviour:
@@ -185,6 +184,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 236839917355576453}
+  defaultCoords: {x: 0, y: 0}
+  heartDrop: {fileID: 1884651429138948294, guid: 7edc1dea7753f74448d8828dce72c6a2, type: 3}
+  chanceOfHeartDrop: 5
+  chanceOfNoteDrop: 5
   health: 10
   damage: 10
 --- !u!114 &5778562162879790153
@@ -202,6 +205,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 1.5
   nextWaypointDistance: 2
+  enemyPaused: 0
 --- !u!58 &5075870490141302937
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -264,48 +268,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2511554814679483915
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8436791469393767563}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.059336185, y: 0.094878316}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 6.566367, y: 5.7231913}
-  m_EdgeRadius: 0

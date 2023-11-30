@@ -6,6 +6,7 @@ using UnityEngine.U2D;
 
 public class PlayerManager : MonoBehaviour
 {
+    public int numNotes;
     [SerializeField] RectTransform fader;
     [SerializeField] private CinemachineVirtualCamera vcam;
     [SerializeField] private Vector2 newCoordinates;
@@ -34,6 +35,9 @@ public class PlayerManager : MonoBehaviour
             if (health <= 0)
             {
                 Defeated();
+            } if ( health >= maxHealth )
+            {
+                health = maxHealth;
             }
         }
         get
@@ -75,24 +79,31 @@ public class PlayerManager : MonoBehaviour
 
     private void Defeated()
     {
+        GameManager.GetInstance().isPaused = true;
         fader.gameObject.SetActive(true);
         diedText.SetActive(true);
         AudioManager.GetInstance().playSFX(diedSound);
         LeanTween.alpha(fader, 1, 0.1f).setOnComplete(() =>
         {
-            Vector2 posDelta = newCoordinates - (Vector2)transform.position;
-            currentRoom.resetEnemies();
-            currentRoom.gameObject.SetActive(false);
-            transform.position = newCoordinates;
-            recordStore.SetActive(true);
-            vcam.OnTargetObjectWarped(transform, posDelta);
-            health = 50;
-            LeanTween.alpha(fader, 0, 1.5f).setOnComplete(() =>
-            {
-                fader.gameObject.SetActive(false);
-                diedText.SetActive(false);
-                DialogueManager.GetInstance().EnterDialogueMode(deathMessage);
-            });
+            StartCoroutine(warpBack());
+        });
+    }
+
+    private IEnumerator warpBack()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Vector2 posDelta = newCoordinates - (Vector2)transform.position;
+        currentRoom.resetEnemies();
+        currentRoom.gameObject.SetActive(false);
+        transform.position = newCoordinates;
+        recordStore.SetActive(true);
+        vcam.OnTargetObjectWarped(transform, posDelta);
+        health = 50;
+        LeanTween.alpha(fader, 0, 1.5f).setOnComplete(() =>
+        {
+            fader.gameObject.SetActive(false);
+            diedText.SetActive(false);
+            DialogueManager.GetInstance().EnterDialogueMode(deathMessage);
         });
     }
 }
