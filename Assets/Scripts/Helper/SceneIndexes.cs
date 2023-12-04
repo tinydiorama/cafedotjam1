@@ -6,5 +6,6 @@ public enum SceneIndexes
     MANAGER = 0,
     TITLE_SCREEN = 1,
     MAIN_WORLD = 2,
-    LETTER_SCREEN = 3
+    LETTER_SCREEN = 3,
+    END_SCREEN = 4
 }

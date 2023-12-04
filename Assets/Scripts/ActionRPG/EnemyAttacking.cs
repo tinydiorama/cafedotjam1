@@ -32,11 +32,19 @@ public class EnemyAttacking : MonoBehaviour
             if (distance < 4)
             {
                 timer += Time.deltaTime;
-                if (timer > nextTimer)
+                if (timer > nextTimer && ! isAttacking)
                 {
                     StartCoroutine(attackWindup());
                 }
             }
+        }
+        if ( enemyAI.enemyKnockback )
+        {
+            isAttacking = false;
+            timer = 0;
+            nextTimer = Random.Range(1f, 3f);
+            StopCoroutine(attackWindup());
+            StopCoroutine(attack());
         }
 
     }
@@ -73,7 +81,7 @@ public class EnemyAttacking : MonoBehaviour
 
             if (player != null)
             {
-                Debug.Log("player hit for " + damage + " plus " + AudioManager.GetInstance().getCurrentPlayerDefenseChange() + " modifier = " + (damage + AudioManager.GetInstance().getCurrentPlayerDefenseChange()));
+                //Debug.Log("player hit for " + damage + " plus " + AudioManager.GetInstance().getCurrentPlayerDefenseChange() + " modifier = " + (damage + AudioManager.GetInstance().getCurrentPlayerDefenseChange()));
                 player.Health -= (damage + AudioManager.GetInstance().getCurrentPlayerDefenseChange());
             }
         }

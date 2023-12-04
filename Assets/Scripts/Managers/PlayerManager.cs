@@ -103,7 +103,7 @@ public class PlayerManager : MonoBehaviour
         {
             fader.gameObject.SetActive(false);
             diedText.SetActive(false);
-            DialogueManager.GetInstance().EnterDialogueMode(deathMessage);
+            DialogueManager.GetInstance().EnterDialogueMode(deathMessage, null);
         });
     }
 }

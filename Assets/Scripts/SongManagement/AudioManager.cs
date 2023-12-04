@@ -8,11 +8,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _sfxsource;
     [SerializeField] private AudioClip titleSong;
     [SerializeField] private List<Song> songs;
+    [SerializeField] private Song bossSong;
     [SerializeField] private int songPlaying;
     [SerializeField] private float transitionTime = 1f;
 
     private static AudioManager instance;
     private bool playlistStarted;
+    private bool bossMusicPlaying;
 
     private void Awake()
     {
@@ -32,7 +34,7 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        if ( !_audiosource.isPlaying && playlistStarted)
+        if ( !_audiosource.isPlaying && playlistStarted && ! GameManager.GetInstance().isConfrontBoss )
         {
             ChangeSong();
             HUD.GetInstance().updateCurrentStats();
@@ -42,6 +44,15 @@ public class AudioManager : MonoBehaviour
     public void FadeOutMusic()
     {
         StartCoroutine(Fade());
+    }
+
+    public void playBossMusic()
+    {
+        bossMusicPlaying = true;
+        _audiosource.clip = bossSong.track;
+        _audiosource.loop = true;
+        _audiosource.volume = 1;
+        _audiosource.Play();
     }
 
     private IEnumerator Fade()
@@ -88,6 +99,10 @@ public class AudioManager : MonoBehaviour
 
     public Song getCurrentTrack()
     {
+        if ( bossMusicPlaying )
+        {
+            return bossSong;
+        }
         return songs[songPlaying];
     }
 
@@ -111,21 +126,37 @@ public class AudioManager : MonoBehaviour
 
     public int getCurrentPlayerAttackChange()
     {
+        if (bossMusicPlaying)
+        {
+            return bossSong.damageOffset;
+        }
         return songs[songPlaying].damageOffset;
     }
 
     public int getCurrentPlayerDefenseChange()
     {
+        if (bossMusicPlaying)
+        {
+            return bossSong.defenseOffset;
+        }
         return songs[songPlaying].defenseOffset;
     }
 
     public string getCurrentPlayerAttackString()
     {
+        if (bossMusicPlaying)
+        {
+            return bossSong.stat1;
+        }
         return songs[songPlaying].stat1;
     }
 
     public string getCurrentPlayerDefenseString()
     {
+        if (bossMusicPlaying)
+        {
+            return bossSong.stat2;
+        }
         return songs[songPlaying].stat2;
     }
 }

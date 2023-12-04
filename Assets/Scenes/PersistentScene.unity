@@ -559,6 +559,7 @@ MonoBehaviour:
   songs:
   - {fileID: 11400000, guid: 362b49f7e8cedc64bbad5b6ef6b35d5a, type: 2}
   - {fileID: 11400000, guid: c1c2ba38a476c4640965f4ddec0a4de3, type: 2}
+  bossSong: {fileID: 11400000, guid: f044f2ce356fc3d44a5200da321874e3, type: 2}
   songPlaying: 0
   transitionTime: 0.5
 --- !u!82 &1119260083

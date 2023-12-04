@@ -48,6 +48,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 91fdb59a62c2a874dae982aac6ac6745, type: 3}
     - target: {fileID: 1048156115356465172, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1048156115356465172, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
       propertyPath: defaultCoords.x
       value: -0.6485276
       objectReference: {fileID: 0}
@@ -57,11 +61,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1919117239962268351, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
       propertyPath: graphMask.value
-      value: 2
+      value: 8192
       objectReference: {fileID: 0}
     - target: {fileID: 4202411942421862066, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4202411942421862066, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -109,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 39865c5569186cf4eaae4403aa4af797, type: 2}
     - target: {fileID: 8436791469393767563, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
       propertyPath: m_Name
-      value: ShootingEnemy Variant
+      value: Eyeling
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

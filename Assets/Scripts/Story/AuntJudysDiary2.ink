@@ -5,5 +5,5 @@ Let's listen.
 Wow, Aunt Judy. A DJ? For real? Wow.
 "Of course, no one can scratch records like me. He ran away mewling. But..."
 "Before he left, he said, 'You think you bested me? I curse thee to a life of nothing but cat-astrophe!'"
-"... what a weird DJ."
+"What a sore loser."
 Hmm. Wow. Looks like there's a lot I didn't know about Aunt Judy.

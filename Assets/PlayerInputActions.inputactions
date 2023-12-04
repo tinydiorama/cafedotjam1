@@ -274,6 +274,28 @@
                 },
                 {
                     "name": "",
+                    "id": "ae6d1341-3c8f-400e-9972-0687f4b48021",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b2a8222f-3657-490d-bdac-f03bbfdde8dc",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "2711628e-9615-485a-8c03-a71b73f75210",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -309,6 +331,28 @@
                     "name": "",
                     "id": "5738d268-cfc9-4d42-a083-facb4f468cb4",
                     "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "576106a8-005f-46bf-ae09-6c5da2f97894",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12cbb2f0-c837-4597-94f1-61e1b38f8334",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

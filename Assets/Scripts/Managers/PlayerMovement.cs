@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _smoothedMovementInput;
     private Vector2 _movementInputSmoothVelocity;
     private GameManager gm;
+    private float attackingCounter;
+    private float attackingCooldown = 0.3f;
 
     // dashing
     private float activeMoveSpeed;
@@ -34,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     // Door
     private bool doorInRange;
     private DoorManager doorTrigger;
+    private BossDoor bossDoor;
 
     private void Start()
     {
@@ -48,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if ( HUD.GetInstance() != null )
         {
-            if (dialogueInRange == true || doorInRange == true)
+            if (dialogueInRange == true || doorInRange == true || gm.isConfrontBoss )
             {
                 HUD.GetInstance().hideHelpText();
             }
@@ -104,6 +107,15 @@ public class PlayerMovement : MonoBehaviour
 
         updateAnimation();
 
+        if ( attackingCounter > 0 )
+        {
+            attackingCounter -= Time.deltaTime;
+            if ( attackingCounter < 0 )
+            {
+                attackingCounter = 0;
+            }
+        }
+
         if ( dashCounter > 0 )
         {
             dashCounter -= Time.deltaTime;
@@ -129,6 +141,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void setAlbumFaceUp()
+    {
+        animator.SetFloat("Horizontal", 0);
+        animator.SetFloat("Vertical", 1);
+        animator.Play("PlayerIdle");
+    }
+
     private void OnMove(InputValue movementValue)
     {
         moveInput = movementValue.Get<Vector2>();
@@ -138,11 +157,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if ( gm.isGameStarted && ! gm.isPaused )
         {
-            animator.Play("PlayerAttack");
-            playerAttack.attack();
-            AudioManager.GetInstance().playSFX(attackSound);
-            animLocked = true;
-            canMove = false;
+            if ( attackingCounter == 0 )
+            {
+                attackingCounter = attackingCooldown;
+                animator.Play("PlayerAttack");
+                playerAttack.attack();
+                AudioManager.GetInstance().playSFX(attackSound);
+                animLocked = true;
+                canMove = false;
+            }
         }
     }
 
@@ -176,12 +199,16 @@ public class PlayerMovement : MonoBehaviour
         tr.emitting = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Door")
         {
             doorInRange = true;
             doorTrigger = collision.gameObject.GetComponent<DoorManager>();
+            if ( doorTrigger == null ) // must be the bossDoor
+            {
+                bossDoor = collision.gameObject.GetComponent<BossDoor>();
+            }
         }
     }
 
@@ -191,6 +218,7 @@ public class PlayerMovement : MonoBehaviour
         {
             doorInRange = false;
             doorTrigger = null;
+            bossDoor = null;
         }
     }
 
@@ -200,12 +228,18 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!dialogueInRange && doorInRange)
             {
-                doorTrigger.goToCoordinates();
+                if (doorTrigger != null) // must be the bossDoor
+                {
+                    doorTrigger.goToCoordinates();
+                } 
             }
-            else if (gm.isGameStarted && !dialogueInRange)// change playlist
+            else if (!doorInRange && gm.isGameStarted && !dialogueInRange)// change playlist
             {
-                AudioManager.GetInstance().ChangeSong();
-                HUD.GetInstance().updateCurrentStats();
+                if (!gm.isConfrontBoss )
+                {
+                    AudioManager.GetInstance().ChangeSong();
+                    HUD.GetInstance().updateCurrentStats();
+                }
             }
         }
     }

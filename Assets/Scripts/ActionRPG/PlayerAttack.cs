@@ -49,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator enableCollider()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0f);
         hitCollider.enabled = true;
 
     }
@@ -77,7 +77,6 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("player attack");
         // deal damage
         if ( other.gameObject.tag == "Enemy" && isAttacking )
         {
@@ -85,10 +84,34 @@ public class PlayerAttack : MonoBehaviour
 
             if ( enemy != null )
             {
-                Debug.Log("attacking enemy for damage " + damage + " plus " + AudioManager.GetInstance().getCurrentPlayerAttackChange());
+
+                Vector3 direction = (other.transform.position - transform.position).normalized;
+                Rigidbody2D otherBody = other.GetComponent<Rigidbody2D>();
+                //Debug.Log("attacking enemy for damage " + damage + " plus " + AudioManager.GetInstance().getCurrentPlayerAttackChange());
                 enemy.Health -= damage + AudioManager.GetInstance().getCurrentPlayerAttackChange();
                 isAttacking = false;
+
+                if ( otherBody != null && ! enemy.noKnockback )
+                {
+                    StartCoroutine(knockback(otherBody.GetComponent<EnemyAI>(), otherBody, direction));
+                }
             }
+        }
+    }
+
+    private IEnumerator knockback(EnemyAI enemyAI, Rigidbody2D otherBody, Vector3 direction)
+    {
+        if ( otherBody != null )
+        {
+            enemyAI.enemyKnockback = true;
+            otherBody.velocity = new Vector2(0, 0);
+            otherBody.velocity = direction * 10f;
+            yield return new WaitForSeconds(0.3f);
+            if ( otherBody != null )
+            {
+                otherBody.velocity = new Vector2(0, 0);
+            }
+            enemyAI.enemyKnockback = false;
         }
     }
 

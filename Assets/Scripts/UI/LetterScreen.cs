@@ -30,7 +30,7 @@ public class LetterScreen : MonoBehaviour
 
     public void startGame()
     {
-        loader.LoadLevel((int)SceneIndexes.MAIN_WORLD, new Vector2(0f, 0f));
+        loader.LoadLevel((int)SceneIndexes.MAIN_WORLD, new Vector2(1.46f, -1.11f));
         AudioManager.GetInstance().playSFX(goSound);
     }
 }

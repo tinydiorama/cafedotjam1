@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LetterScene.unity
     guid: 51a0ffd7588176a4f899c9f390382ca0
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: bfe8fe12fb3ce50469873aee28ce32ee
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8380f5775e334464b863d97333dd33a5, type: 2}

@@ -36,6 +36,8 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogue = false;
     private bool canChoose = false;
 
+    private Action callbackMethod;
+
     public bool dialogueIsPlaying { get; private set; }
 
     private static DialogueManager instance;
@@ -83,7 +85,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON)
+    public void EnterDialogueMode(TextAsset inkJSON, Action callback)
     {
         GameManager.GetInstance().isPaused = true;
         currentStory = new Story(inkJSON.text);
@@ -98,6 +100,7 @@ public class DialogueManager : MonoBehaviour
 
         dialogueIsPlaying = true;
         currentPanel.SetActive(true);
+        callbackMethod = callback;
 
         ContinueStory();
     }
@@ -111,6 +114,11 @@ public class DialogueManager : MonoBehaviour
         currentText.text = "";
 
         GameManager.GetInstance().isPaused = false;
+
+        if (callbackMethod != null)
+        {
+            callbackMethod();
+        }
     }
 
     private void ContinueStory()

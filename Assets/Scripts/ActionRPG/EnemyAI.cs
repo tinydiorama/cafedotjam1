@@ -5,9 +5,10 @@ using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] public Transform target;
     [SerializeField] private float speed = 200;
     [SerializeField] private float nextWaypointDistance = 3f;
+    [SerializeField] private float distanceForWander = 4f;
 
     private Path path;
     private int currentWaypoint = 0;
@@ -16,10 +17,11 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 targetDirection;
     public bool enemyPaused;
+    public bool enemyKnockback;
 
     // wander randomly
     private float wanderTimer;
-    private float wanderCooldown = 2f;
+    private float wanderCooldown = 1f;
 
     private GameObject player;
 
@@ -56,12 +58,12 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if ( ! GameManager.GetInstance().isPaused && ! enemyPaused )
+        if ( ! GameManager.GetInstance().isPaused && ! enemyPaused && ! enemyKnockback )
         {
 
             float playerDistance = Vector2.Distance(transform.position, player.transform.position);
 
-            if (playerDistance < 2.5)
+            if (playerDistance < distanceForWander)
             {
                 if (currentWaypoint >= path.vectorPath.Count)
                 {

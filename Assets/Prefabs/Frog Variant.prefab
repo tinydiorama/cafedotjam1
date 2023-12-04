@@ -47,6 +47,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 38ad6472de29c864390e564c7a6a0685, type: 3}
+    - target: {fileID: 1048156115356465172, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
+      propertyPath: damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1048156115356465172, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
+      propertyPath: health
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919117239962268351, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
+      propertyPath: graphMask.value
+      value: 8192
+      objectReference: {fileID: 0}
     - target: {fileID: 4202411942421862066, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -90,6 +102,10 @@ PrefabInstance:
     - target: {fileID: 4202411942421862066, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778562162879790153, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
+      propertyPath: speed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6672037087331331542, guid: 4f07a1309e367a04f85cc020c35fab6c, type: 3}
       propertyPath: m_Controller

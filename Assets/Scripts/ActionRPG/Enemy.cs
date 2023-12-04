@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     [Range(0, 9)]
     [SerializeField] private int chanceOfNoteDrop;
 
+    public bool noKnockback;
+
     public int Health
     {
         set
@@ -33,24 +35,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int health = 10;
     public int damage = 5;
 
-    private void Start()
-    {
-        //defaultCoords = transform.localPosition;
-    }
-
     public void resetPosition()
     {
         transform.localPosition = defaultCoords;
     }
 
-    public void Defeated()
+    public virtual void Defeated()
     {
         // spawn random drops
         int randomDrop = Random.Range(0, 9);
-        Debug.Log(randomDrop);
         if ( randomDrop <= chanceOfHeartDrop)
         {
-            Debug.Log("instantiating heart");
             GameObject obj = Instantiate(heartDrop, transform.parent);
             obj.transform.localPosition = transform.localPosition;
         }

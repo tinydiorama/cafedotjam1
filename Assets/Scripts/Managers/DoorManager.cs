@@ -48,6 +48,7 @@ public class DoorManager : MonoBehaviour
 
     public void goToCoordinates()
     {
+        GameManager.GetInstance().isPaused = true;
         fader.gameObject.SetActive(true);
         LeanTween.alpha(fader, 1, 0.5f).setOnComplete(() =>
         {
@@ -58,6 +59,7 @@ public class DoorManager : MonoBehaviour
             newRoom.resetEnemies();
             PlayerManager.GetInstance().setActiveRoom(newRoom);
             vcam.OnTargetObjectWarped(player.transform, posDelta);
+            GameManager.GetInstance().isPaused = false;
             LeanTween.alpha(fader, 0, 1f).setOnComplete(() =>
             {
                 fader.gameObject.SetActive(false);

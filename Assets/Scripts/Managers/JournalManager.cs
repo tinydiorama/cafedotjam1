@@ -26,7 +26,7 @@ public class JournalManager : MonoBehaviour
     {
         if (journalEntries[journalIndex] != null )
         {
-            DialogueManager.GetInstance().EnterDialogueMode(journalEntries[journalIndex]);
+            DialogueManager.GetInstance().EnterDialogueMode(journalEntries[journalIndex], null);
             journalIndex++;
             return journalIndex - 1;
         }
@@ -35,6 +35,6 @@ public class JournalManager : MonoBehaviour
 
     public void playJournalEntry( int index )
     {
-        DialogueManager.GetInstance().EnterDialogueMode(journalEntries[index]);
+        DialogueManager.GetInstance().EnterDialogueMode(journalEntries[index], null);
     }
 }

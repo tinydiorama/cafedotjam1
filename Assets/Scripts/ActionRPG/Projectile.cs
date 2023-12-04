@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
 
             if (player != null)
             {
-                Debug.Log("player hit for " + damage + " plus " + AudioManager.GetInstance().getCurrentPlayerDefenseChange() + " modifier = " + (damage + AudioManager.GetInstance().getCurrentPlayerDefenseChange()));
+                //Debug.Log("player hit for " + damage + " plus " + AudioManager.GetInstance().getCurrentPlayerDefenseChange() + " modifier = " + (damage + AudioManager.GetInstance().getCurrentPlayerDefenseChange()));
                 player.Health -= (damage + AudioManager.GetInstance().getCurrentPlayerDefenseChange());
                 Destroy(gameObject);
             }

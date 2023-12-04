@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188b1eb05ec981641a928bd6e9605110, type: 3}
+  m_Name: BossMusic
+  m_EditorClassIdentifier: 
+  bpm: 0
+  track: {fileID: 8300000, guid: 8644fdc4aba8c514294fb310b5b5921d, type: 3}
+  firstBeatOffset: 0
+  damageOffset: 5
+  defenseOffset: -5
+  stat1: Attack up!
+  stat2: Defense up!
+  noteCombos: []

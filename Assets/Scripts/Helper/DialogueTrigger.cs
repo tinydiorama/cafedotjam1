@@ -29,7 +29,6 @@ public class DialogueTrigger : MonoBehaviour
                 {
                     if (journalEntryTrigger && journalIndex == -1)
                     {
-                        Debug.Log("playing next journal entry");
                         journalIndex = JournalManager.GetInstance().playNextJournalEntry();
                     }
                     else if (journalEntryTrigger && journalIndex != -1)
@@ -38,7 +37,7 @@ public class DialogueTrigger : MonoBehaviour
                     }
                     else
                     {
-                        DialogueManager.GetInstance().EnterDialogueMode(dialogue);
+                        DialogueManager.GetInstance().EnterDialogueMode(dialogue, null);
                     }
                 }
             }

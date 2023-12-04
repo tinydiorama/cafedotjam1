@@ -12,7 +12,7 @@ public class StartGame : MonoBehaviour
             GameManager gm = GameManager.GetInstance();
             if ( ! gm.isGameStarted )
             {
-                DialogueManager.GetInstance().EnterDialogueMode(beginningDialogue);
+                DialogueManager.GetInstance().EnterDialogueMode(beginningDialogue, null);
                 gm.startGame();
             }
         }

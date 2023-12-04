@@ -10,7 +10,7 @@ public class StartGameDialogue : MonoBehaviour
     {
         if ( ! GameManager.GetInstance().isBeginningDialogue )
         {
-            DialogueManager.GetInstance().EnterDialogueMode(beginningDialogue);
+            DialogueManager.GetInstance().EnterDialogueMode(beginningDialogue, null);
             GameManager.GetInstance().isBeginningDialogue = true;
         }
     }
